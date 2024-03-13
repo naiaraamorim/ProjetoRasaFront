@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('REVEMAR'),
+          title: const Text('REVEMARR'),
           titleTextStyle: const TextStyle(
               color: Colors.white, fontSize: 22, fontWeight: FontWeight.w500),
           iconTheme: const IconThemeData(
