@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:unibot_app/Screans/screen_intranet.dart';
+import 'package:unibot_app/Screans/screen_nbs.dart';
+import 'package:unibot_app/Screans/screen_remoto.dart';
 
 class TelaSelect extends StatefulWidget {
-  const TelaSelect({super.key});
+  const TelaSelect({Key? key}) : super(key: key);
 
   @override
   State<TelaSelect> createState() => _TelaSelectState();
@@ -34,14 +37,18 @@ class _TelaSelectState extends State<TelaSelect> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        4), // Ajusta este valor para 0 para tornar os botões quadrados
+                    borderRadius: BorderRadius.circular(4),
                   ),
                   foregroundColor: Colors.white,
                   textStyle: const TextStyle(fontSize: 25),
                   backgroundColor: const Color.fromARGB(255, 189, 26, 34),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ChatScreen()));
+                },
                 child: const Text('NBS'),
               ),
             ),
@@ -54,14 +61,18 @@ class _TelaSelectState extends State<TelaSelect> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        4), // Ajusta este valor para 0 para tornar os botões quadrados
+                    borderRadius: BorderRadius.circular(4),
                   ),
                   foregroundColor: Colors.white,
                   textStyle: const TextStyle(fontSize: 20),
                   backgroundColor: const Color.fromARGB(255, 189, 26, 34),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ChatScreenIntranet()));
+                },
                 child: const Text('INTRANET'),
               ),
             ),
@@ -74,14 +85,18 @@ class _TelaSelectState extends State<TelaSelect> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        4), // Ajusta este valor para 0 para tornar os botões quadrados
+                    borderRadius: BorderRadius.circular(4),
                   ),
                   foregroundColor: Colors.white,
                   textStyle: const TextStyle(fontSize: 20),
                   backgroundColor: const Color.fromARGB(255, 189, 26, 34),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ChatScreenRemoto()));
+                },
                 child: const Text('REMOTO'),
               ),
             ),

@@ -11,54 +11,70 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('REVEMARR'),
-          titleTextStyle: const TextStyle(
-              color: Colors.white, fontSize: 22, fontWeight: FontWeight.w500),
-          iconTheme: const IconThemeData(
-              color: Colors.white), // Defina a cor do ícone aqui
-          backgroundColor: const Color.fromARGB(255, 167, 25, 32),
+    return const MaterialApp(
+      home: TelaPrincial(),
+    );
+  }
+}
+
+class TelaPrincial extends StatefulWidget {
+  const TelaPrincial({super.key});
+
+  @override
+  State<TelaPrincial> createState() => _TelaPrincialState();
+}
+
+class _TelaPrincialState extends State<TelaPrincial> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    TelaSelect(),
+    //ScreenChatbot(), // Adicione suas telas aqui
+    ChatScreenDefault(), // Substitua Placeholder() pelas outras telas que você quer adicionar
+    Placeholder(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('REVEMAR'),
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
         ),
-        drawer: Drawer(
-          // Conteúdo do menu lateral
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              const SizedBox(
-                height: 100,
-                child: DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 167, 25, 32),
-                  ),
-                  child: Text(
-                    'Menu Lateral',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: const Text('Sobre'),
-                onTap: () {
-                  // Adicione aqui a lógica para lidar com o clique em Item 1
-                },
-              ),
-              ListTile(
-                title: const Text('Sair'),
-                onTap: () {
-                  // Adicione aqui a lógica para lidar com o clique em Item 2
-                },
-              ),
-              // Adicione mais itens do menu conforme necessário
-            ],
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        backgroundColor: const Color.fromARGB(255, 167, 25, 32),
+      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-        ),
-        body: const TelaSelect(),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chatbot',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.red,
+        onTap: _onItemTapped,
       ),
     );
   }

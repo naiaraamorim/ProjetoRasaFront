@@ -3,73 +3,88 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-class ChatScreenDefault extends StatefulWidget {
-  const ChatScreenDefault({super.key});
+class ChatScreenIntranet extends StatefulWidget {
+  const ChatScreenIntranet({super.key});
 
   @override
   ChatScreenState createState() => ChatScreenState();
 }
 
-class ChatScreenState extends State<ChatScreenDefault> {
+class ChatScreenState extends State<ChatScreenIntranet> {
   final TextEditingController _textController = TextEditingController();
   final List<ChatMessage> _messages = [];
   bool _isBotTyping = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white12,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: _messages,
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Atendimento ao INTRANET'),
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        backgroundColor: const Color.fromARGB(255, 167, 25, 32),
+      ),
+      body: Container(
+        color: Colors.white12,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: _messages,
+                ),
               ),
             ),
-          ),
-          if (_isBotTyping)
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
-              alignment: Alignment.centerLeft,
-              child: const Row(
-                children: [
-                  SizedBox(
-                    width: 20.0,
-                    height: 20.0,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2.0,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+            if (_isBotTyping)
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
+                alignment: Alignment.centerLeft,
+                child: const Row(
+                  children: [
+                    SizedBox(
+                      width: 20.0,
+                      height: 20.0,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 8.0),
-                  Text('Bot digitando...'),
-                ],
+                    SizedBox(width: 8.0),
+                    Text('Bot digitando...'),
+                  ],
+                ),
+              ),
+            if (_messages.isEmpty)
+              Container(
+                height: 250,
+                alignment: Alignment.topCenter,
+                child: const Text(
+                  'Tire suas dúvidas sobre os sistemas revemar',
+                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w300),
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white12,
+                  border:
+                      Border.all(color: const Color.fromARGB(255, 167, 25, 32)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: _buildTextComposer(),
               ),
             ),
-          if (_messages.isEmpty)
-            Container(
-              height: 250,
-              alignment: Alignment.topCenter,
-              child: const Text(
-                'Tire suas dúvidas sobre os sistemas revemar',
-                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w300),
-              ),
-            ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white12,
-                border:
-                    Border.all(color: const Color.fromARGB(255, 167, 25, 32)),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: _buildTextComposer(),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
